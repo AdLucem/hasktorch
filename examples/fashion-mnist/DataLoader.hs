@@ -1,0 +1,1 @@
+-- load and read in the data from the fashion-mnist dataset
