@@ -8,16 +8,22 @@
 module Main where
 
 import Torch.Double
-import Prelude hiding ((!!))
+import Prelude
+-- import qualified Data.ByteString.Lazy as BL
+-- import System.IO
 
-{-|
-Training a linear classifier (softmax) to classify pictures from the fashion-mnist dataset
--}
+-- local imports
+import DataLoader
+
+
+-- Training a linear classifier (softmax) to classify pictures from the fashion-mnist dataset
+
 
 -- | our softmax classifier model as a type
 -- okay no put this in a separate types file
 -- data Model
 
 -- | driver function
-main = putStrLn "TO BE DONE"
-
+main = do
+    d <- dataFetch "train-images-idx3-ubyte"
+    putStrLn $ take 100 d
