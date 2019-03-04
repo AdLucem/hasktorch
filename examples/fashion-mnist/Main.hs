@@ -1,29 +1,39 @@
-{-# LANGUAGE DataKinds, ScopedTypeVariables, GADTs #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE TypeInType #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-cse #-}
+----------------------------------------------------------------------------------
+-- |
+-- Module    :  Main
+-- Maintainer:  AdLucem
+-- Stability :  experimental
+-- Portability: non-portable
+
+-----------------------------------------------------------------------------------
+
+-------------------------------------- IMPORTS ------------------------------------
 
 module Main where
 
-import Torch.Double
-import Prelude
--- import qualified Data.ByteString.Lazy as BL
--- import System.IO
+import qualified Data.Vector.Unboxed as V
 
--- local imports
+-- Local imports:
+
 import DataLoader
 
+-- Training a convolutional neural net to classify pictures from the fashion-mnist dataset
 
--- Training a linear classifier (softmax) to classify pictures from the fashion-mnist dataset
+--------------------------------------- MAIN --------------------------------------
+
+getData :: FilePath -> IO ((V.Vector Int, V.Vector Double))
+getData filename = do
+    d <- fetchDataFrom filename
+    let d' = dataProcess d
+    return d'
 
 
--- | our softmax classifier model as a type
--- okay no put this in a separate types file
--- data Model
+getLabels :: FilePath -> IO (V.Vector (Int))
+getLabels filename = do
+    l <- fetchLabelsFrom filename
+    let l' = labelsProcess l
+    return l'
 
--- | driver function
-main = do
-    d <- dataFetch "train-images-idx3-ubyte"
-    putStrLn $ take 100 d
+
+-- | The driver function
+main = putStrLn "HELLO"
